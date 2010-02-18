@@ -1,0 +1,13 @@
+1. install in any apache accessible directory
+2. allow run permissions on the php scripts
+3. allow write permissions on the data dir unless you want to pass in an alternate
+4. Call seedsv http://blah/seedsv.php?sep=[sep]&header=[header]&dir=[writeable_dir]&data=[readable_file]
+		where:
+			[sep]: 		is the delimiter (ex: sep=, sep=\t)
+			[header]:	line number (zero-indexed) with colnames (ex: header=0)
+							or
+						comment char if last comment line is colnames (ex: header=#)
+							or
+						-1, empty string or undefined if no column names exist (ex: header=-1)
+			[dir]:		an accessible directory to put the sqlite files
+			[data]:		the delimited file to display
