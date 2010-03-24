@@ -19,6 +19,7 @@ $dbprefix = $data_file;
 
 if ($persistent != 1){
 	$dbprefix = $dbprefix.time();//.$timeasinteger;
+	set_time_limit(0);
 }
 
 $dbname = $working_dir.$dbprefix.'.sqlite';
@@ -41,18 +42,19 @@ echo <<<PAGEHEAD
 <div id="loadingDiv" name="loadingDiv">
 <img src="resources/db_load.gif", name="dbload_img"/>
 Creating database ...
-</div>
 PAGEHEAD;
 
 
 //force all this loading stuff to the browser
 flush_now();
 
-echo '<a href="'.$data_file_url.'"><font size=-1>Download</font></a>';
-
 if ($persistent != 1 || !file_exists($dbname)){
 	makeDBfromFile($file, $dbname, $header,$sep);
 }
+
+echo '</div>';
+
+echo '<a href="'.$data_file_url.'"><font size=-1>Download</font></a>';
 
 echo <<<PAGETOP
 
@@ -193,10 +195,18 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 	$dbh->exec($create_stmt);
 	$dbh->exec( 'begin transaction');
 	$dbh->exec('insert into "data" values('."'".join("','",$values)."')");
+	$st_time= time();
 	while (!feof($file)){
 	    $values = preg_split('/'.$sep.'/', trim(fgets($file)));
 	    $dbh->exec('insert into "data" values('."'".join("','",$values)."')");
 		//echo join(",",$values);
+		$c_time = time();
+		if (($c_time > $st_time) && ($c_time-$st_time) % 10 == 0){
+			echo "&#00;";
+			$st_time = time();
+			flush_now();
+		
+		}
 	}
 	$dbh->exec('COMMIT TRANSACTION');
 	
