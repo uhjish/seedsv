@@ -124,7 +124,7 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 			break;
 		}
 	    if (is_numeric($header)){
-	        if ($count <= (int)$header){
+	        if ($count < (int)$header){
 	            $header_line = trim($line);
 	        }else{
 	            break;
@@ -140,16 +140,20 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 	}
 	
 	
-	$header_line = str_replace(" ", "_", $header_line);
-	$header_line = str_replace('"', "", $header_line);
+	#$header_line = preg_replace('/\W+/', "_", $header_line);
+	#$header_line = str_replace(" ", "_", $header_line);
+	#$header_line = str_replace('"', "", $header_line);
+	#$header_line = str_replace("(", "_", $header_line);
+	#$header_line = str_replace(")", "_", $header_line);
+	#$header_line = str_replace("/", "_", $header_line);
 	
 	
 	$ncols = 0;
 	$colnames = array();
 	$coltypes = array();
 	$values = array();
-    #echo $header_line;
-    #echo "line: ".$line;
+    echo $header_line;
+    echo "line: ".$line;
 	
 	$line = trim($line);
 	if ($line == ''){
@@ -159,7 +163,9 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 	
 	$colnames = preg_split('/'.$sep.'/', $header_line);
 	$values = preg_split('/'.$sep.'/', $line);
-	
+    foreach ($colnames as &$coln) {
+	    $coln = preg_replace('/\W+/', "_", $coln);
+    }	
 	if (($header_line != '') && (count($colnames) != count($values))){
 	    exit("Number of column names does not match number of values!".count($colnames).'  '.count($values));
 	}
