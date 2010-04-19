@@ -47,9 +47,19 @@ PAGEHEAD;
 
 //force all this loading stuff to the browser
 flush_now();
+#echo $file."\n";
+echo $dbname."\n";
+echo $header."\n";
+echo $sep."\n";
 
 if ($persistent != 1 || !file_exists($dbname)){
+#	echo $file."\n";
+#	echo $dbname."\n";
+#	echo $header."\n";
+#	echo $sep."\n";
+	echo "\n Making db from file";
 	makeDBfromFile($file, $dbname, $header,$sep);
+
 }
 
 echo '</div>';
@@ -104,9 +114,10 @@ function flush_now(){
 
 function makeDBfromFile($file, $dbname, $header, $sep){
 
+	ini_set("PHP_INI_USER","apache");
 	$header_line = '';
 	$line = '';
-	$count = 0;
+	$count = -1;
 	while (!feof($file) && $count <= (int)$header ){
 	    $line = fgets($file);
 		if ($header=='' || $header=='-1'){
@@ -137,10 +148,13 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 	$colnames = array();
 	$coltypes = array();
 	$values = array();
+    #echo $header_line;
+    #echo "line: ".$line;
 	
 	$line = trim($line);
 	if ($line == ''){
-	    exit("Empty or malformed file!");
+    
+	    exit("Empty or malformed file! Cannot read the first data line!");
 	}
 	
 	$colnames = preg_split('/'.$sep.'/', $header_line);
