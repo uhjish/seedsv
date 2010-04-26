@@ -113,7 +113,8 @@ function flush_now(){
 }
 
 function makeDBfromFile($file, $dbname, $header, $sep){
-
+    global $int_type, $float_type, $string_type;
+    echo "blah".$int_type;
 	ini_set("PHP_INI_USER","apache");
 	$header_line = '';
 	$line = '';
@@ -138,16 +139,7 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 	    }
 	    $count++;
 	}
-	
-	
-	#$header_line = preg_replace('/\W+/', "_", $header_line);
-	#$header_line = str_replace(" ", "_", $header_line);
-	#$header_line = str_replace('"', "", $header_line);
-	#$header_line = str_replace("(", "_", $header_line);
-	#$header_line = str_replace(")", "_", $header_line);
-	#$header_line = str_replace("/", "_", $header_line);
-	
-	
+
 	$ncols = 0;
 	$colnames = array();
 	$coltypes = array();
@@ -175,7 +167,7 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 	//exit ($header_line);
 	
 	for ($colNum = 0; $colNum < $ncols; $colNum++){
-	    $cur = $values[$colNum];
+	    $cur = trim($values[$colNum]);
 	    //echo $cur;
 	    if (is_numeric($cur)){
 	        if ( (int)$cur == (float)$cur ){
@@ -193,9 +185,6 @@ function makeDBfromFile($file, $dbname, $header, $sep){
 	    }    
 	    
 	}
-	//exit ($line);
-	
-	
 	
 	$create_stmt = "create table data (";
 	for ($colNum = 0; $colNum < $ncols; $colNum++){
