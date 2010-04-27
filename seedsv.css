@@ -1,3 +1,46 @@
+body{
+	margin:0px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#FFFFFF;
+	padding-left:20px;
+}
+
+p{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:#FFFFFF;
+}
+
+h1{
+	font-size:14pt;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#65847B;
+	text-align: center;
+}
+
+h2{
+	font-size:12pt;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#541805;
+}
+
+h3{
+	font-size:11pt;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#541805;
+}
+
+h4{
+	font-size:11pt;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#ffffff;
+}
+
 .firescope_grid .sort-asc {
 	background: #D9DFD9 url('resources/sort-asc.png') no-repeat bottom right;
 	cursor: pointer;

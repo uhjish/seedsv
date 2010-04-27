@@ -9,6 +9,7 @@ $sep = $_REQUEST['sep'];
 $sep = str_replace('\\\\','\\',$sep);
 $header = $_REQUEST['header'];
 $persistent = (int)$_REQUEST['persistent'];
+$display_title = $_REQUEST['title'];
 
 $working_dir = $_REQUEST['dir'];
 //check if dir is writeable
@@ -64,7 +65,10 @@ if ($persistent != 1 || !file_exists($dbname)){
 
 echo '</div>';
 
+echo '<h1>'.$display_title.'</h1>';
+
 echo '<a href="'.$data_file_url.'"><font size=-1>Download</font></a>';
+
 
 echo <<<PAGETOP
 
