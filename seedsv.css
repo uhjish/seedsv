@@ -44,43 +44,43 @@ h4{
 .firescope_grid .sort-asc {
 	background: #D9DFD9 url('resources/sort-asc.png') no-repeat bottom right;
 	cursor: pointer;
-	padding: 0px 4px 2px 2px;	
+	padding: 0px 4px 2px 2px;
 }
 .firescope_grid .sort-desc {
 	background: #D9DFD9 url('resources/sort-desc.png') no-repeat bottom right;
 	cursor: pointer;
-	padding: 0px 4px 2px 2px;	
+	padding: 0px 4px 2px 2px;
 }
 .firescope_grid .sort-none {
 	background: #DDD url('resources/sort-none.png') no-repeat bottom right;
 	cursor: pointer;
-	padding: 0px 4px 2px 2px;	
+	padding: 0px 4px 2px 2px;
 }
 .firescope_grid .sort-sorting {
 	background: #DDD url('resources/load.gif') no-repeat bottom right;
 	cursor: pointer;
-	padding: 0px 4px 2px 2px;		
+	padding: 0px 4px 2px 2px;
 }
 
 .firescope_grid .help {
 	background: url('resources/help_icon.png') no-repeat center center;
 	cursor: pointer;
-	border: 0px;	
+	border: 0px;
 	width: 20px;
-	height: 20px;	
+	height: 20px;
 }
 .firescope_grid .nav-first {
 	background: url('resources/first.png') no-repeat center center;
 	cursor: pointer;
-	border: 0px;	
+	border: 0px;
 	width: 30px;
-	height: 20px;	
+	height: 20px;
 }
 .firescope_grid .nav-prev {
 	background: url('resources/prev.png') no-repeat center center;
 	cursor: pointer;
-	border: 0px;	
-	width: 30px;	
+	border: 0px;
+	width: 30px;
 	height: 20px;
 }
 .firescope_grid .nav-next {
@@ -93,8 +93,8 @@ h4{
 .firescope_grid .nav-last {
 	background: url('resources/last.png') no-repeat center center;
 	cursor: pointer;
-	border: 0px;	
-	width: 30px;	
+	border: 0px;
+	width: 30px;
 	height: 20px;
 }
 .firescope_grid .nav-disabled {
@@ -103,25 +103,25 @@ h4{
 .firescope_grid .nav-reload {
 	background: url('resources/load.png') no-repeat center center;
 	cursor: pointer;
-	border: 0px;	
+	border: 0px;
 	width: 30px;
-	height: 20px;	
+	height: 20px;
 }
 .firescope_grid .loading {
 	background: url('resources/load.gif') no-repeat center center;
 	cursor: pointer;
 	border: 0px;
 	width: 30px;
-	height: 20px;		
+	height: 20px;
 }
 .firescope_grid .nav-loading {
-	background-color: #F3F7F3;	
+	background-color: #F3F7F3;
 }
 .firescope_grid .grid-split {
 	background: url('resources/grid-split.gif') no-repeat center center;
 	padding: 0px 6px 2px 6px;
-	width: 10px;	
-}			
+	width: 10px;
+}
 .firescope_grid .nav-toolbar {
 	font-size: 10px;
 	font-family: Verdana,Helvetica,Geneva;
@@ -136,7 +136,7 @@ h4{
 	border: 1px solid #BCCCE1;
 	margin: 0px 0px 0px 4px;
 	font-size: 10px;
-	font-family: Verdana,Helvetica,Geneva;	
+	font-family: Verdana,Helvetica,Geneva;
 }
 .firescope_grid .nav-rows:hover, .firescope_grid .nav-rows:focus {
 	background-color: #FFC;
@@ -150,7 +150,7 @@ h4{
 	padding-bottom: 2px;
 	margin-bottom: 0px;
 	font-size: 10px;
-	font-family: Verdana,Helvetica,Geneva;		
+	font-family: Verdana,Helvetica,Geneva;
 }
 .firescope_grid .nav-page-input:hover, .firescope_grid .nav-page-input:focus {
 	background-color: #FFC;
@@ -163,13 +163,13 @@ h4{
 	width: 96%;
 	color: #686;
 	font-size: 10px;
-	font-family: Verdana,Helvetica,Geneva;			
+	font-family: Verdana,Helvetica,Geneva;
 }
 .firescope_grid .filter-inactive {
 	width: 96%;
 	color: #AAA;
 	font-size: 10px;
-	font-family: Verdana,Helvetica,Geneva;			
+	font-family: Verdana,Helvetica,Geneva;
 }
 .firescope_grid .filter-filtering {
 	background: url('resources/load.gif') no-repeat center right;
@@ -186,11 +186,13 @@ h4{
 	width: 100%;
 	border-spacing: 0;
 }
+
+
 .firescope_grid table td {
 	border: 1px solid #777;
 }
 
-.firescope_grid .scrollable { 
-height: 50px; 
-overflow: auto; 
+.firescope_grid .scrollable {
+height: 50px;
+overflow: auto;
 }
