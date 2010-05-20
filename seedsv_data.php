@@ -14,6 +14,12 @@ function parseFilterText( $fCol, $fText){
         if ($max != "." && $max != "" && is_numeric($max)){
             $fString .= " AND ".$fCol." <= ".$max;
         }
+    }elseif (substr($fText,0,1)=="{" && substr($fText,-1,1)=="}") {
+        //multiple strings
+        $fText = substr($fText,1,-1);
+        $possibles = explode(",",$fText);
+        $fString .= " AND ($fCol LIKE '%".join("%' OR $fCol LIKE '%",$possibles)."%')";  
+        
     }else{
         //text regex
         $fString .= " AND ".$fCol." LIKE '%".$fText."%'";
