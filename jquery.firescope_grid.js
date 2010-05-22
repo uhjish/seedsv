@@ -76,6 +76,7 @@ jQuery.fn.firescope_grid = function(options) {
 	var cfg = {
         // important options
         url: '',                 // ;url to get data from via ajax
+        dlurl: '',
         rows: 25,                // #; nbr rows to show at a time; x rows = 1 page
         selectorHeader: 'tr th', // null|*; selector used to find() the table header
                 
@@ -178,6 +179,10 @@ jQuery.fn.firescope_grid = function(options) {
 	var m_help_btn= $('<button type="button" class="help"><br/></button>').click( function() {
 		g.showHelp();
 	});	
+	// go to help page
+	var m_save_btn= $('<button type="button" class="save"><br/></button>').click( function() {
+		g.saveFilteredData();
+	});	
 	// go to first page
 	var m_start_btn = $('<button type="button" class="nav-first"><br/></button>').click( function() {
 		g.startPage();
@@ -240,9 +245,55 @@ jQuery.fn.firescope_grid = function(options) {
 			}
 			
 			// go to initial cfg page
-			g.gotoPage(cfg.page);		
+			g.gotoPage(cfg.page);
 		},		
-		
+	    saveFilteredData: function() {
+			// grid parms to send to url; your server script needs to do stuff with these; most likely in your sql
+			var parms = {
+				firescope_grid_page: cfg.page,
+				firescope_grid_rows: cfg.rows,
+				firescope_grid_offset: (cfg.page - 1) * cfg.rows,
+				firescope_grid_sortCol: cfg.sortCol, 
+				firescope_grid_sortOrder: cfg.sortOrder,
+				firescope_grid_filterCol: cfg.filterCol, 
+				firescope_grid_filterText: cfg.filterText				
+			};
+			var header = m_content.find(cfg.selectorHeader);
+			if (header.length == 0) {
+				header = m_content.find('table tr:first'); // default to first table row
+			}
+			if (cfg.returnSortColName && cfg.sortCol >= 0 && header.length > 0) {
+				cfg.sortColName = $(header[cfg.sortCol]).find('span').html();
+				parms.firescope_grid_sortColName = cfg.sortColName;
+			}
+			if (cfg.returnFilterColName && cfg.filterCol >= 0 && header.length > 0) {
+				cfg.filterColName = $(header[cfg.filterCol]).find('span').html();
+				parms.firescope_grid_filterColName = cfg.filterColName;
+			}			
+			
+			// get user parms
+			$.extend(parms, cfg.data);
+            method = "post"; // Set method to post by default, if not specified.
+            url = "seedsv_data.php";
+            // The rest of this code assumes you are not using a library.
+            // It can be made less wordy if you use one.
+            var form = document.createElement("form");
+            form.setAttribute("method", method);
+            form.setAttribute("action", cfg.dlurl);
+            form.setAttribute("target", "_blank");
+            for(var key in parms) {
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", key);
+                hiddenField.setAttribute("value", parms[key]);
+
+                form.appendChild(hiddenField);
+            }
+
+            document.body.appendChild(form);    // Not entirely sure if this is necessary
+            form.submit();
+        },
+ 
 		// the meat; load data
 		gotoPage: function(page) {
 			if (page > 0) {
@@ -275,7 +326,6 @@ jQuery.fn.firescope_grid = function(options) {
 			
 			// get user parms
 			$.extend(parms, cfg.data);
-			
 			jQuery.ajax({
 				url: cfg.url,
 				data: parms,
@@ -357,7 +407,6 @@ jQuery.fn.firescope_grid = function(options) {
 			});
 		
 		},
-		
 		refreshPage: function() {
 			if (cfg.timeout != null) {
 				clearTimeout(cfg.timeout);
@@ -393,6 +442,9 @@ jQuery.fn.firescope_grid = function(options) {
 				g.gotoPage(cfg.page);
 			}
 		},
+        getFilteredData: function(){
+
+        },
 		showHelp: function() {
 			window.open("instructions.htm", "Help","width=800,height=300,status=0,toolbar=0,menubar=0,location=0,directories=0");
 		},
@@ -541,6 +593,7 @@ jQuery.fn.firescope_grid = function(options) {
 				// build nav bar
 				m_nav_bar.css('text-align', cfg.navBarAlign);			
 				m_nav_bar.append(m_help_btn);
+				m_nav_bar.append(m_save_btn);
 				m_nav_bar.append(m_rows).append(cfg.msgRows).append(m_split.clone());
 				m_nav_bar.append(m_start_btn).append(m_prev_btn).append(m_split.clone());
 				if (cfg.total > 0) {

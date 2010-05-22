@@ -11,7 +11,8 @@ $header = $_REQUEST['header'];
 $persistent = (int)$_REQUEST['persistent'];
 $display_title = $_REQUEST['title'];
 
-$working_dir = $_REQUEST['dir'];
+$working_dir = "/tmp/";
+//$_REQUEST['dir'];
 //check if dir is writeable
 
 $data_file = end(split('\/',$data_file_url));
@@ -85,6 +86,7 @@ $(document).ready( function() {
 PAGETOP;
 
 echo "url: 'seedsv_data.php?db=".$dbname."&table=data&firescope_grid=yarp', // your server side file";
+echo "\ndlurl: 'seedsv_download.php?db=".$dbname."&table=data&firescope_grid=yarp', // your server side file";
 
 echo  <<<PAGEBOTTOM
                 filterCols: ['auto'],

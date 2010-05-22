@@ -69,6 +69,14 @@ h4{
 	width: 20px;
 	height: 20px;
 }
+
+.firescope_grid .save {
+	background: url('resources/save.gif') no-repeat center center;
+	cursor: pointer;
+	border: 0px;
+	width: 20px;
+	height: 20px;
+}
 .firescope_grid .nav-first {
 	background: url('resources/first.png') no-repeat center center;
 	cursor: pointer;

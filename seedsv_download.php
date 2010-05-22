@@ -1,7 +1,7 @@
 <?php
 
-$tbl_colors = array( "00"=>"#FCFAE8", "01"=>"#F4EDAB", "10"=>"#F8F3CA", "11"=>"#F0E68C" ); 
-
+header('Content-Type: text/force-download');
+header("Content-Disposition: attachment; filename=filtered_data.csv");
 
 function parseFilterText( $fCol, $fText){
     $fString = '';
@@ -68,50 +68,17 @@ if (isset($_REQUEST['firescope_grid'])) {
                     $sql_suff.=" ORDER BY ".$colnames[$_REQUEST['firescope_grid_sortCol']]." ".$_REQUEST['firescope_grid_sortOrder'];
 		}
 
-		$offset = ($_REQUEST['firescope_grid_page'] - 1) * $_REQUEST['firescope_grid_rows'];
-
-        $sql_suff.=" LIMIT ".$_REQUEST['firescope_grid_rows']." OFFSET ".$offset;
-
         $sql = $sql_pref.$sql_query.$sql_suff;
 
 		$qry = $dbh->query($sql) or exit ($sql);
 
 		$rows = $qry->fetchAll();
-		$total = count($rows);
 
-		//$rows = array_slice($rows, $offset, $_REQUEST['firescope_grid_rows']);
-		// or use mysql_data_seek()
-		// or add a `LIMIT $offset, $_REQUEST['firescope_grid_rows']` to your sql
-
-		$output = '<table><tr>';
-                foreach ($colnames as $col){
-                    $output .= '<th>'.$col.'</th>';
-                }
-        $rowidx = 0;
+        print join("\t",$colnames);
 		foreach ($rows as $row) {
-			$output .= '<tr>';
-            $colidx = 0;
-            foreach ($colnames as $col){
-                $color_idx = (string)($rowidx%2) . (string)($colidx%2);
-                $output .=	'<td bgcolor="'.$tbl_colors[$color_idx].'"><div class="scrollable">'.$row[$col].'</div></td>';
-                $colidx++;
-            }
-		    $rowidx++;
+            print "\n".join("\t",$row);
 		}
 
-		$output .= '</table>';
-
-		ob_clean();
-
-                $sql_pref = "SELECT COUNT(*) FROM ".$table." WHERE 1";
-                $sql = $sql_pref.$sql_query;
-                $total = $dbh->query($sql)->fetch(PDO::FETCH_NUM);
-                $total = $total[0];
-
-                ob_clean();
-
-		echo '<span id="firescope_grid_example_total" style="display:none">'.$total.'</span>';
-		echo '<span>'.$output.'</span>';
 		exit();
 
 	} catch(PDOException $e) {
