@@ -796,11 +796,34 @@ jQuery.fn.firescope_grid = function(options) {
                             values = values.join(";");
                             //alert(colName);
                             cfg.filterArray[colName].val(values);
-                            g.m_filter_action(e,cfg.filterArray[colName]);
-                }
+                            elem = cfg.filterArray[colName];
+                            cfg.filters[elem.attr('col')] = elem.val()
+	                        elem.addClass('filter-active');
+	                        elem.removeClass('filter-inactive');				
+	                        
+                            
+                        }
+
+		                var filtCols = "";
+		                var filtTexts ="";
+		                var i;
+		                for (i = 0; i < cfg.filters.length; i++){
+		                    if ( cfg.filters[i] != undefined ){
+	                            
+		                        filtCols = filtCols + i + "|";
+		                        filtTexts = filtTexts + cfg.colnames[i] + ":" + cfg.filters[i] + "|";
+		                    }
+		                }
+		                
+		                cfg.filterText= filtTexts;
+		                cfg.filterCol = filtCols;
+		                
+		                g.gotoPage(1);
                     
-            }
+                    }
         
+        },
+        doNothing: function(){
         },
 		
 		showBrowserInfo: function() {
