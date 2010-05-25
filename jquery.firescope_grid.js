@@ -194,7 +194,7 @@ jQuery.fn.firescope_grid = function(options) {
                 cfg.rows = $(this).val();
                 g.gotoPage(1);
             });
-            var m_append_filter = $('<input type=text name=append_filter alt="enter filter string to append"></input>').click( function() {
+            var m_append_filter = $('<input type=text name=append_filter value="<append filter>" alt="enter filter string to append"></input>').click( function() {
                 $(this).val('');
             }).bind('keypress blur', function(e) {
                 g.appendFilters(e, this);
@@ -779,7 +779,7 @@ jQuery.fn.firescope_grid = function(options) {
                         //split the pipes
                         append_cols = append_filter.split("|");
                         for (var idx =0; idx < append_cols.length; idx++){
-                            alert(append_cols[idx]);
+                            //alert(append_cols[idx]);
                             prs = append_cols[idx].split(":");
                             colName = prs[0];
                             values = prs[1].split(";");
@@ -792,7 +792,7 @@ jQuery.fn.firescope_grid = function(options) {
                             values = values.concat(prev_values);
                             values = values.unique();
                             values = values.join(";");
-                            alert(colName);
+                            //alert(colName);
                             cfg.filterArray[colName].val(values);
                             g.m_filter_action(e,cfg.filterArray[colName]);
                 }
