@@ -473,7 +473,7 @@ jQuery.fn.firescope_grid = function(options) {
 
                 },
                 showHelp: function() {
-                    window.open("instructions.htm", "Help","width=800,height=300,status=0,toolbar=0,menubar=0,location=0,directories=0");
+                    window.open("instructions.htm", "Help","width=800,height=300,scrollbars=1,status=0,toolbar=0,menubar=0,location=0,directories=0");
                 },
                 
                 updateGrid: function() {
@@ -782,6 +782,8 @@ jQuery.fn.firescope_grid = function(options) {
                             //alert(append_cols[idx]);
                             prs = append_cols[idx].split(":");
                             colName = prs[0];
+                            //window.status = "Loading ". colName;
+                            //alert(idx);
                             values = prs[1].split(";");
                             prev_values = cfg.filterArray[colName].val();
                             if (prev_values != cfg.msgFilterHelp && prev_values != ""){ 

@@ -123,7 +123,7 @@ if (isset($_REQUEST['firescope_grid'])) {
                 ob_clean();
 
 		echo '<span id="firescope_grid_example_total" style="display:none">'.$total.'</span>';
-		echo '<span id="firescope_grid_example_filterString">'.$filterTextStr.'</span>';
+			echo '<span id="firescope_grid_example_filterString"><br>'.$filterTextStr.'</span>';
 		echo '<span>'.$output.'</span>';
 		exit();
 
