@@ -68,7 +68,7 @@ echo '</div>';
 
 echo '<h1>'.$display_title.'</h1>';
 
-echo '<a href="'.$data_file_url.'"><font size=-1>Download</font></a>';
+//echo '<a href="'.$data_file_url.'"><font size=-1>Download</font></a>';
 
 
 echo <<<PAGETOP
