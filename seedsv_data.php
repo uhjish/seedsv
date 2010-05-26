@@ -15,8 +15,11 @@ function parseFilterText( $fCol, $fColTexts){
 	        if ($min != "." && $min != "" && is_numeric($min)){
 	            $fString .= " ".$fCol." >= ".$min;
 	        }
+            if ($min != "" && $max != "" && $min != "." && $max !="."){
+                $fString .= " AND ";
+            } 
 	        if ($max != "." && $max != "" && is_numeric($max)){
-	            $fString .= " AND ".$fCol." <= ".$max;
+	            $fString .= $fCol." <= ".$max;
 	        }
 	    }elseif (substr($fText,0,1)=="{" && substr($fText,-1,1)=="}") {
 	        //multiple strings
