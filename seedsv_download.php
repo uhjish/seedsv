@@ -52,7 +52,8 @@ if (isset($_REQUEST['firescope_grid'])) {
                 ob_clean();
 
 		$sql_pref = "SELECT * FROM ".$table." WHERE 1 ";
-                $sql_query = " ";
+         
+		$sql_query = " ";
                 if ($_REQUEST['firescope_grid_filterCol']!='' && strlen($_REQUEST['firescope_grid_filterText']) > 0) {
                     //break up the columns
                     $filterCols = $_REQUEST['firescope_grid_filterCol'];
@@ -80,9 +81,10 @@ if (isset($_REQUEST['firescope_grid'])) {
 
 		$offset = ($_REQUEST['firescope_grid_page'] - 1) * $_REQUEST['firescope_grid_rows'];
 
-        $sql_suff.=" LIMIT ".$_REQUEST['firescope_grid_rows']." OFFSET ".$offset;
+        #$sql_suff.=" LIMIT ".$_REQUEST['firescope_grid_rows']." OFFSET ".$offset;
 
-        $sql = $sql_pref.$sql_query.$sql_suff;
+		$sql = $sql_pref.$sql_query.$sql_suff;
+		fwrite(STDERR, $sql."\n");
 
 		$qry = $dbh->query($sql) or exit ($sql);
 
@@ -93,7 +95,16 @@ if (isset($_REQUEST['firescope_grid'])) {
 
         print join("\t",$colnames);
 		foreach ($rows as $row) {
-            print "\n".join("\t",$row);
+		  $ct=0;
+		  print "\n";
+		  foreach ($colnames as $col){
+		    if ($ct>0){
+		      print "\t";
+		    }
+		    
+		    print $row[$col];
+		    $ct++;
+		  }
 		}
 
 		exit();
